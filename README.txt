@@ -1,6 +1,7 @@
 Instruction Set
 
-The Meowzart VM will have a total of 28 instructions, divided into 6 categories:
+The Meowzart VM will have a total of 28 instructions, divided into 6 categories.
+Additional opcodes are reserved for future extensions.
 
 1 - Load/Store (4 instructions)
 2 - Arithmetic (8 instructions)
