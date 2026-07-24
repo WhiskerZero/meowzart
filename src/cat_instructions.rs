@@ -107,6 +107,7 @@ impl fmt::Display for Instruction {
             Instruction::Load(rd, rn, offset) => {
                 write!(f, "LOAD R{}, R{}, {}", rd, rn, offset)
             }
+            _ => write!(f, "UNKNOWN"),
             Instruction::Store(rd, rn, offset) => {
                 write!(f, "STORE R{}, R{}, {}", rd, rn, offset)
             }
@@ -173,8 +174,9 @@ impl fmt::Display for Instruction {
 fn execute_instruction(instruction: Instruction) {
     match instruction {
         Instruction::Load(rd, rn, offset) => {
-        write!(f, "LOAD R{}, R{}, {}", rd, rn, offset)
+            println!("LOAD R{}, R{}, {}", rd, rn, offset);
         }
+        _ => {}
         // ... and so on for all instructions
     }
 }
