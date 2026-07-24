@@ -1,18 +1,103 @@
 use std::fmt;
 
 // Define an enum for the instructions
-#[derive(Debug, PartialEq, Eq, Clone, Copy)]
-enum Instruction {
-    Load(u8, u8),
-    Store(u8, u8),
-    Add(u8, u8),
-    Sub(u8, u8),
-    Mul(u8, u8),
-    Div(u8, u8),
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Instruction {
+    // Load / Store (0x01 - 0x04)
+
+    /// LOAD Rd, Rn, offset
+    Load(u8, u8, u8),
+
+    /// STORE Rd, Rn, offset
+    Store(u8, u8, u8),
+
+    /// PUSH Rn
+    Push(u8),
+
+    /// POP Rd
+    Pop(u8),
+
+    // Arithmetic (0x10 - 0x17)
+
+    /// ADD Rd, Rn, Rm
+    Add(u8, u8, u8),
+
+    /// SUB Rd, Rn, Rm
+    Sub(u8, u8, u8),
+
+    /// MUL Rd, Rn, Rm
+    Mul(u8, u8, u8),
+
+    /// DIV Rd, Rn, Rm
+    Div(u8, u8, u8),
+
+    /// MOD Rd, Rn, Rm
+    Mod(u8, u8, u8),
+
+    /// INC Rn
+    Inc(u8),
+
+    /// DEC Rn
+    Dec(u8),
+
+    /// NEG Rn
+    Neg(u8),
+
+    // Control Flow (0x20 - 0x23)
+
+    /// JMP label
     Jmp(u8),
+
+    /// JEQ label, Rn, Rm
     Jeq(u8, u8, u8),
+
+    /// JNE label, Rn, Rm
     Jne(u8, u8, u8),
-    // ... and so on for all instructions
+
+    /// RET
+    Ret,
+
+    // Memory Management (0x30 - 0x33)
+
+    /// ALLOC size
+    Alloc(u8),
+
+    /// FREE ptr
+    Free(u8),
+
+    /// READ Rd, ptr
+    Read(u8, u8),
+
+    /// WRITE ptr, value
+    Write(u8, u8),
+
+    // Input / Output (0x40 - 0x43)
+
+    /// IN Rd
+    In(u8),
+
+    /// OUT value
+    Out(u8),
+
+    /// READC Rd
+    Readc(u8),
+
+    /// WRITEC value
+    Writec(u8),
+
+    // Miscellaneous (0xFC - 0xFF)
+
+    /// INFO
+    Info,
+
+    /// DEBUG
+    Debug,
+
+    /// HALT
+    Halt,
+    
+    /// NOP
+    Nop,
 }
 
 impl fmt::Display for Instruction {
