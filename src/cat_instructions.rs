@@ -172,11 +172,8 @@ impl fmt::Display for Instruction {
 // Define a function to execute an instruction
 fn execute_instruction(instruction: Instruction) {
     match instruction {
-        Instruction::Load(rd, rn) => {
-            // Implement LOAD instruction
-        }
-        Instruction::Store(rd, rn) => {
-            // Implement STORE instruction
+        Instruction::Load(rd, rn, offset) => {
+        write!(f, "LOAD R{}, R{}, {}", rd, rn, offset)
         }
         // ... and so on for all instructions
     }
