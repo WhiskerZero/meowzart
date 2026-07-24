@@ -171,7 +171,7 @@ impl fmt::Display for Instruction {
 }
 
 // Define a function to execute an instruction
-fn execute_instruction(instruction: Instruction) {
+pub fn execute_instruction(instruction: Instruction) {
     match instruction {
         Instruction::Load(rd, rn, offset) => {
             println!("LOAD R{}, R{}, {}", rd, rn, offset);
