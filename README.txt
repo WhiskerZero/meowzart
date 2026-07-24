@@ -2,13 +2,14 @@ Instruction Set
 
 The Meowzart VM will have a total of 32 instructions, divided into 8 categories:
 
-Load/Store (4 instructions)
-Arithmetic (8 instructions)
-Control Flow (4 instructions)
-Memory Management (4 instructions)
-Input/Output (4 instructions)
-Miscellaneous (4 instructions)
-Load/Store Instructions
+1 - Load/Store (4 instructions)
+2 - Arithmetic (8 instructions)
+3 - Control Flow (4 instructions)
+4 - Memory Management (4 instructions)
+5 - Input/Output (4 instructions)
+6 - Miscellaneous (4 instructions)
+
+1 - Load/Store Instructions
 
 LOAD: Load a value from memory into a register.
 Opcode: 0x01
@@ -26,7 +27,8 @@ POP: Pop a value from the stack into a register.
 Opcode: 0x04
 Syntax: POP Rd
 Description: Pop a value from the stack into register Rd.
-Arithmetic Instructions
+
+2 - Arithmetic Instructions
 
 ADD: Add two values and store the result in a register.
 Opcode: 0x10
@@ -60,7 +62,8 @@ NEG: Negate a value in a register.
 Opcode: 0x17
 Syntax: NEG Rn
 Description: Negate the value in register Rn.
-Control Flow Instructions
+
+3 - Snow Control
 
 JMP: Jump to a label.
 Opcode: 0x20
@@ -78,7 +81,8 @@ RET: Return from a function.
 Opcode: 0x23
 Syntax: RET
 Description: Return from a function.
-Memory Management Instructions
+
+4 - Memory Management
 
 ALLOC: Allocate memory.
 Opcode: 0x30
@@ -96,7 +100,8 @@ WRITE: Write to memory.
 Opcode: 0x33
 Syntax: WRITE ptr, value
 Description: Write the value value to memory address ptr.
-Input/Output Instructions
+
+5 - Input/Output
 
 IN: Read input from the user.
 Opcode: 0x40
@@ -114,7 +119,8 @@ WRITEC: Write a character to the user.
 Opcode: 0x43
 Syntax: WRITEC value
 Description: Write the character value to the user.
-Miscellaneous Instructions
+
+6 - Miscellaneous 
 
 NOP: No operation.
 Opcode: 0xFF
