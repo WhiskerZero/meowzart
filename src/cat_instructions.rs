@@ -103,16 +103,68 @@ pub enum Instruction {
 impl fmt::Display for Instruction {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Instruction::Load(rd, rn) => write!(f, "LOAD R{}, R{}", rd, rn),
-            Instruction::Store(rd, rn) => write!(f, "STORE R{}, R{}", rd, rn),
-            Instruction::Add(rd, rn) => write!(f, "ADD R{}, R{}", rd, rn),
-            Instruction::Sub(rd, rn) => write!(f, "SUB R{}, R{}", rd, rn),
-            Instruction::Mul(rd, rn) => write!(f, "MUL R{}, R{}", rd, rn),
-            Instruction::Div(rd, rn) => write!(f, "DIV R{}, R{}", rd, rn),
+            // Load / Store
+            Instruction::Load(rd, rn, offset) => {
+                write!(f, "LOAD R{}, R{}, {}", rd, rn, offset)
+            }
+            Instruction::Store(rd, rn, offset) => {
+                write!(f, "STORE R{}, R{}, {}", rd, rn, offset)
+            }
+            Instruction::Push(rn) => write!(f, "PUSH R{}", rn),
+            Instruction::Pop(rd) => write!(f, "POP R{}", rd),
+
+            // Arithmetic
+            Instruction::Add(rd, rn, rm) => {
+                write!(f, "ADD R{}, R{}, R{}", rd, rn, rm)
+            }
+            Instruction::Sub(rd, rn, rm) => {
+                write!(f, "SUB R{}, R{}, R{}", rd, rn, rm)
+            }
+            Instruction::Mul(rd, rn, rm) => {
+                write!(f, "MUL R{}, R{}, R{}", rd, rn, rm)
+            }
+            Instruction::Div(rd, rn, rm) => {
+                write!(f, "DIV R{}, R{}, R{}", rd, rn, rm)
+            }
+            Instruction::Mod(rd, rn, rm) => {
+                write!(f, "MOD R{}, R{}, R{}", rd, rn, rm)
+            }
+
+            Instruction::Inc(rn) => write!(f, "INC R{}", rn),
+            Instruction::Dec(rn) => write!(f, "DEC R{}", rn),
+            Instruction::Neg(rn) => write!(f, "NEG R{}", rn),
+
+            // Control Flow
             Instruction::Jmp(addr) => write!(f, "JMP {}", addr),
-            Instruction::Jeq(label, rn, rm) => write!(f, "JEQ {}, R{}, R{}", label, rn, rm),
-            Instruction::Jne(label, rn, rm) => write!(f, "JNE {}, R{}, R{}", label, rn, rm),
-            // ... and so on for all instructions
+            Instruction::Jeq(label, rn, rm) => {
+                write!(f, "JEQ {}, R{}, R{}", label, rn, rm)
+            }
+            Instruction::Jne(label, rn, rm) => {
+                write!(f, "JNE {}, R{}, R{}", label, rn, rm)
+            }
+            Instruction::Ret => write!(f, "RET"),
+
+            // Memory
+            Instruction::Alloc(size) => write!(f, "ALLOC {}", size),
+            Instruction::Free(ptr) => write!(f, "FREE R{}", ptr),
+            Instruction::Read(rd, ptr) => {
+                write!(f, "READ R{}, R{}", rd, ptr)
+            }
+            Instruction::Write(ptr, value) => {
+                write!(f, "WRITE R{}, {}", ptr, value)
+            }
+
+            // Input / Output
+            Instruction::In(rd) => write!(f, "IN R{}", rd),
+            Instruction::Out(value) => write!(f, "OUT {}", value),
+            Instruction::Readc(rd) => write!(f, "READC R{}", rd),
+            Instruction::Writec(value) => write!(f, "WRITEC {}", value),
+
+            // Misc
+            Instruction::Info => write!(f, "INFO"),
+            Instruction::Debug => write!(f, "DEBUG"),
+            Instruction::Halt => write!(f, "HALT"),
+            Instruction::Nop => write!(f, "NOP"),
         }
     }
 }
